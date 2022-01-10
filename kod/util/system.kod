@@ -5976,6 +5976,7 @@ messages:
 
       plItemTemplates = cons(create(&ShieldRod),plItemTemplates);
       plItemTemplates = cons(create(&DamageRod),plItemTemplates);
+	  plItemTemplates = cons(create(&WeaponWand),plItemTemplates);
 
       return;
    }

@@ -29,7 +29,7 @@ messages:
    {
       local oEquipmentItem, iBonusModifier, oSpell, lSpellList;
 
-      oEquipmentItem = Create(&Mace);
+      oEquipmentItem = Create(&WeaponWand,#school=Send(oSpell,@GetSchool));
       iBonusModifier = 3;
 
       viDifficulty = piBaseDifficulty + iBonusModifier;
