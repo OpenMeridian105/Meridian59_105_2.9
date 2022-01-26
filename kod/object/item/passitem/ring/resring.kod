@@ -43,6 +43,8 @@ classvars:
    // Resistance rings hide their color until revealed or worn
    viUnrevealedColor = PT_ITEM_XLAT_BLUE_TO_WHITE
 
+   vbIsNotStackable = FALSE // FALSE = can be combined = stackable
+
 properties:
 
    piResistanceType = 0

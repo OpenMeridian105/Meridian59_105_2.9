@@ -48,6 +48,8 @@ classvars:
 
    viValue_average = 470
 
+   vbIsNotStackable = FALSE // FALSE = can be combined = stackable
+
 properties:
 
    pbIn_use = FALSE

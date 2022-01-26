@@ -24,6 +24,10 @@ resources:
    ring_identified_name_rsc = "generic magical ring"
    ring_identified_description_rsc = "The has some magical effect."
 
+   combine_rings_rsc = \
+      "You combine the %s with your current stock, for a total "
+      "of %d uses."
+
 classvars:
 
    viUse_type = ITEM_USE_FINGER
@@ -33,6 +37,8 @@ classvars:
 
    vrRealName = ring_identified_name_rsc
    vrRealDesc = ring_identified_name_rsc
+
+   vbIsNotStackable = TRUE // rings are not stackable by default
 
 properties:
 
@@ -80,6 +86,40 @@ messages:
       return vrRealName;
    }
 
+   CombineRings(what = $)
+   {
+      local iSacrificeHits;
+
+      if vbIsNotStackable
+      {
+         return;
+      }
+
+      if what = $
+      {
+         return;
+      }
+
+      iSacrificeHits = Send(what,@GetHits);
+      if iSacrificeHits = $
+         OR iSacrificeHits < 1
+      {
+         return;
+      }
+      
+      Send(self,@SetHits,#number=piHits + iSacrificeHits);
+
+      if IsClass(poOwner,&User)
+      {
+         Send(poOwner,@MsgSendUser,#message_rsc=combine_rings_rsc,
+               #parm1=Send(what,@GetName),
+               #parm2=piHits);
+      }
+
+      Send(what,@Delete);
+
+      return;
+   }
 
 end
 ////////////////////////////////////////////////////////////////////////////////

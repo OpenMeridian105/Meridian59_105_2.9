@@ -52,6 +52,8 @@ classvars:
    
    viValue_average = 200
 
+   vbIsNotStackable = FALSE // FALSE = can be combined = stackable
+
 properties:
 
 

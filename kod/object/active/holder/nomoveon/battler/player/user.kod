@@ -8951,7 +8951,7 @@ messages:
 
    NewHold(what = $, bFromReagentBag = FALSE, check_combine = TRUE)
    {
-      local i, oLastSpellItem;
+      local i, oLastRing, oLastSpellItem;
 
       if what = $
          OR what = self
@@ -8989,6 +8989,25 @@ messages:
          if oLastSpellItem <> $
          {
             Post(oLastSpellItem,@CombineSpellItems,#what=what);
+         }
+      }
+
+      if IsClass(what,&Ring)
+         AND (piPreferences & CF_AUTOCOMBINE)
+         AND check_combine
+      {
+         foreach i in plPassive
+         {
+            if GetClass(i) = GetClass(what)
+               AND i <> what
+            {
+               oLastRing = i;
+            }
+         }
+
+         if oLastRing <> $
+         {
+            Post(oLastRing,@CombineRings,#what=what);
          }
       }
 
