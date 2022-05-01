@@ -65,9 +65,24 @@ messages:
       return 0;
    }
 
-   DoSpellEffects(who = $, iSpellPower = 0)
+   GetTargets(who=$,lTargets=$)
+   "This returns a list of valid targets in range."
    {
-      local oRoom, iChance, bAll;
+      local oRoom, i, each_obj, lFinalTargets, iSpellPower;
+
+      iSpellPower = Send(self,@GetSpellPower,#who=who);
+
+      oRoom = Send(who,@GetOwner);
+      lFinalTargets = Send(oRoom,@EnchantAllInRange,#what=self,
+                           #range=(6+(iSpellpower+1)/20),#center=who,
+                           #monsters=TRUE);
+
+      return lFinalTargets;
+   }
+
+   DoSpellEffects(who = $, lTargets = $, iSpellPower = 0)
+   {
+      local oRoom, iChance, bAll, i;
 
       oRoom = Send(who,@GetOwner);
 
@@ -82,30 +97,42 @@ messages:
          iChance = Bound(iSpellPower,10,99);
       }
 
-      // Only attempt to dispell all illusions if the player can PvP.
-      if IsClass(who,&Player)
+      foreach i in lTargets
       {
-         bAll = Send(who,@CanPlayerPvP);
+         // Only attempt to dispell all illusions if the player can PvP.
+         if IsClass(who,&Player)
+         {
+            bAll = Send(who,@CanPlayerPvP);
+         }
+         else
+         {
+            bAll = TRUE;
+         }
+
+         if bAll
+         {
+            Send(oRoom,@DispelIllusionEnchantments,#who=who,#iChance=iChance,
+                  #stroke_obj=self);
+         }
+
+         Send(oRoom,@DispelIllusions,#who=who,#what=self,#iChance=iChance,
+               #bAll=bAll,#stroke_obj=self);
+
+         Send(who,@MsgSendUser,#message_rsc=dispelillusion_castermsg_rsc);
+
+         return TRUE;
       }
-      else
-      {
-         bAll = TRUE;
-      }
 
-      if bAll
-      {
-         Send(oRoom,@DispelIllusionEnchantments,#who=who,#iChance=iChance,
-               #stroke_obj=self);
-      }
-
-      Send(oRoom,@DispelIllusions,#who=who,#what=self,#iChance=iChance,
-            #bAll=bAll,#stroke_obj=self);
-
-      Send(who,@MsgSendUser,#message_rsc=dispelillusion_castermsg_rsc);
-
-      return TRUE;
+      return;
    }
 
+   // We just needed a list of players in range, so we don't do anything here.
+   StartEnchantment(who = $)
+   "Starts enchantment effect on one player"
+   {
+      return;
+   }
+   
    GetScrollClass()
    {
       return &DispellIllusionScroll;
