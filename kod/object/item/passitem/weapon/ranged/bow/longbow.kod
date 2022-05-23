@@ -30,7 +30,7 @@ classvars:
 
    viWeaponDamage = 0
    viRange = 100 * FINENESS
-   viHit_roll_modifier = 100
+   viHit_roll_modifier = 0
 
    viValue_average = 2500
    viBulk = 80
