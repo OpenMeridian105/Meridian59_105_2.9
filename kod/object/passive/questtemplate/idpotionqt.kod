@@ -195,8 +195,8 @@ messages:
       // QNT_ID_POTION_ID_THREE
       if Send(oQE,@AddQuestNodeTemplate,#questnode_type=QN_TYPE_ITEM,
                #cargolist=[ [ QN_PRIZETYPE_ITEMCLASS, &LabeledPotion, 1 ] ],
-               #prizelist=[ [ [ QN_PRIZETYPE_ITEMCLASS, &Money, 5000 ],
-                              [ QN_PRIZETYPE_ITEMCLASS, &Money, 8000 ],
+               #prizelist=[ [ [ QN_PRIZETYPE_ITEMCLASS, &Shillings, 5000 ],
+                              [ QN_PRIZETYPE_ITEMCLASS, &Shillings, 8000 ],
                               [ QN_PRIZETYPE_ITEMCLASS, &InkyCap, 8 ],
                               [ QN_PRIZETYPE_ITEMCLASS, &Cheese, 6 ],
                               [ QN_PRIZETYPE_ITEMCLASS, &ShortSword, 1 ],

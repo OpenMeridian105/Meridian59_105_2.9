@@ -8,7 +8,7 @@
 
 
 ////////////////////////////////////////////////////////////////////////////////
-Money is NumberItem
+Silver is Money
 
 constants:
 
@@ -16,40 +16,25 @@ constants:
 
 resources:
 
+   Silver_name_one_rsc = "silver"
+   Silver_name_many_rsc = "silver"
+
+   Silver_icon_rsc = coin.bgf
+   Silver_desc_rsc = \
+      "The currency of Meridian.  A profile of an ancient princess "
+      "adorns the front and an apothecary's stone the back."
+
 classvars:
 
-   viBulk = 0
-   viWeight = 0
+   vrName = Silver_name_one_rsc
+   vrIcon = Silver_icon_rsc
+   vrDesc = Silver_desc_rsc
 
-   viValue_average = 1
-
-   viUse_type = ITEM_CANT_USE
-   viItem_type = ITEMTYPE_MONEY
-
-   viGround_group = 2
-   viInventory_group = 1
+   vrName_plural = Silver_name_many_rsc
 
 properties:
 
-   viObject_flags = OF_GETTABLE
-
 messages:
-
-   GetValue()
-   {
-      return piNumber * Send(self,@GetInitValue);
-   }
-
-   FixMoney(amount = $)
-   "Bounds money to the upper limit of 'amount'."
-   {
-      if amount <> $
-      {
-         piNumber = Bound(piNumber,0,amount);
-      }
-
-      return;
-   }
 
 end
 ////////////////////////////////////////////////////////////////////////////////

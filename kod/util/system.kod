@@ -561,7 +561,7 @@ messages:
       poHolder1 = Create(&Holder);
       poHolder2 = Create(&Holder);
 
-      poMoney = Create(&Money,#number=1);
+      poMoney = Create(&Shillings,#number=1);
       poTotem = Create(&Totem);
       poTotemOne = Create(&TotemOne);
       poTotemTwo = Create(&TotemTwo);
@@ -5684,7 +5684,8 @@ messages:
       plItemTemplates = cons(create(&ScrollSplitter),plItemTemplates);
       plItemTemplates = cons(create(&ReagentBag),plItemTemplates);
 
-      plItemTemplates = cons(create(&Money),plItemTemplates);
+      plItemTemplates = cons(create(&Shillings),plItemTemplates);
+      plItemTemplates = cons(create(&Silver),plItemTemplates);
       plItemTemplates = cons(create(&StatsResetToken,#temporary=FALSE),
                               plItemTemplates);
 
@@ -5988,7 +5989,8 @@ messages:
    RecreateMoneyTemplates()
    {
       plMoneyTemplates = $;
-      plMoneyTemplates = Cons(create(&Money),plMoneyTemplates);
+      plMoneyTemplates = Cons(create(&Shillings),plMoneyTemplates);
+      plMoneyTemplates = Cons(create(&Silver),plMoneyTemplates);
 
       return;
    }

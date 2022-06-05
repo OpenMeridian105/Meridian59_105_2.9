@@ -255,7 +255,7 @@ messages:
 
       foreach i in item_list
       {
-         if NOT IsClass(i,&Money)
+         if NOT IsClass(i,&Shillings)
          {
             if GetClass(i) = &RoomKeyCopy
             {

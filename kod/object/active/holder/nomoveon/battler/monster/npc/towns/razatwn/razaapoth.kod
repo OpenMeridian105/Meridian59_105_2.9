@@ -40,6 +40,8 @@ classvars:
 
 properties:
 
+   poCurrency = &Silver
+   
 messages:
 
    SetForSale()
